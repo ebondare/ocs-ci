@@ -128,10 +128,13 @@ class TestPostInstallationState(ManageTest):
                             f"{cephclient['metadata']['annotations']['ocs.openshift.io.storageclaim']}-"
                             f"{cephclient['metadata']['annotations']['ocs.openshift.io.cephusertype']}"
                         )
+                        log.info(
+                            f"Ceph client {found_client} for {consumer_name} found"
+                        )
+                        found_clients.append(found_client)
                     except KeyError as err:
                         log.error(f"Unexpected structure of cephclient yaml: {err}")
-                    log.info(f"Ceph client {found_client} for {consumer_name} found")
-                    found_clients.append(found_client)
+
             for client in {
                 "rbd-provisioner",
                 "rbd-node",
